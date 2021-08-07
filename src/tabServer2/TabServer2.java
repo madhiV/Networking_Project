@@ -12,6 +12,7 @@ public class TabServer2 extends JFrame{
     JScrollPane jsp;
     private static Pattern pat;
     private static Matcher mat;
+    ChatBox2 b;
     public TabServer2() throws Exception{
         try {
             conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","madhi","java");
@@ -20,6 +21,7 @@ public class TabServer2 extends JFrame{
         catch(Exception e){
 
         }
+        setBackground(Color.RED);
         setTitle("USER2's CHATBOX");
         setBounds(10,10,1000,1000);
         setLayout(new BorderLayout());
@@ -27,7 +29,8 @@ public class TabServer2 extends JFrame{
         tabs=new JTabbedPane(JTabbedPane.LEFT);
         panel1=new LogIn2();
         panel2=new SignUp2();
-        panel3=new ChatBox2();
+        b=new ChatBox2();
+        panel3=b;
         jsp=new JScrollPane(panel2);
         tabs.add("LOGIN",new JScrollPane(panel1));
         tabs.add("SIGN UP",jsp);
@@ -36,6 +39,7 @@ public class TabServer2 extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(tabs);
         setResizable(false);
+        b.establishConn();
     }
     public static boolean isValidName(String name){
         pat=Pattern.compile("[a-zA-Z][a-zA-Z ]+");

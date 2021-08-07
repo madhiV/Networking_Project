@@ -12,6 +12,7 @@ public class TabServer2 extends JFrame{
     JScrollPane jsp;
     private static Pattern pat;
     private static Matcher mat;
+    ChatBox2 b;
     public TabServer2() throws Exception{
         try {
             conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:XE","madhi","java");
@@ -27,7 +28,8 @@ public class TabServer2 extends JFrame{
         tabs=new JTabbedPane(JTabbedPane.LEFT);
         panel1=new LogIn2();
         panel2=new SignUp2();
-        panel3=new ChatBox2();
+        b=new ChatBox2();
+        panel3=b;
         jsp=new JScrollPane(panel2);
         tabs.add("LOGIN",new JScrollPane(panel1));
         tabs.add("SIGN UP",jsp);
@@ -35,6 +37,7 @@ public class TabServer2 extends JFrame{
         hideChatBox();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(tabs);
+        b.establishConn();
         setResizable(false);
     }
     public static boolean isValidName(String name){

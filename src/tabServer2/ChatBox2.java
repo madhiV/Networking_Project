@@ -2,13 +2,17 @@ package tabServer2;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-public class ChatBox2 extends JPanel{
+import java.io.*;
+import java.net.*;
+public class ChatBox2 extends JPanel implements Runnable{
     TextArea txt_ar1;
     Label lbl_1;
     TextField txt_fld_1;
+    Socket client;
 
+    final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
     ChatBox2(){
-        setBounds(10,10,1000,100);
+        setBounds(10,10,1000,1000);
         setVisible(true);
         setFont(new Font("Times New Roman",Font.BOLD,18));
         setLayout(null);
@@ -48,10 +52,41 @@ public class ChatBox2 extends JPanel{
             @Override
             public void mouseExited(MouseEvent e) {
 
-            }
+           }
         });
         add(lbl_1);
         add(txt_ar1);
         add(txt_fld_1);
+    }
+
+    @Override
+    public void run() {
+        try {
+            client = new Socket("127.0.0.1", 500);
+        }
+        catch(Exception d){
+
+        }
+    }
+    public void establishConn() throws Exception{
+        Thread t=new Thread(this);
+        t.start();
+        t.join();
+        t=new Thread(){
+            @Override
+            public void run() {
+                try{
+                    while(true){
+                        receivedTxt(br.readLine());
+                    }
+                }
+                catch(Exception e){
+
+                }
+            }
+        };
+    }
+    public void receivedTxt(String msg){
+        txt_ar1.setText(txt_ar1.getText()+"/nHIM : "+msg);
     }
 }

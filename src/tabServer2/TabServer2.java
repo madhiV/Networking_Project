@@ -21,6 +21,7 @@ public class TabServer2 extends JFrame{
         catch(Exception e){
 
         }
+        setBackground(Color.RED);
         setTitle("USER2's CHATBOX");
         setBounds(10,10,1000,1000);
         setLayout(new BorderLayout());
@@ -37,8 +38,8 @@ public class TabServer2 extends JFrame{
         hideChatBox();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(tabs);
-        b.establishConn();
         setResizable(false);
+        b.establishConn();
     }
     public static boolean isValidName(String name){
         pat=Pattern.compile("[a-zA-Z][a-zA-Z ]+");

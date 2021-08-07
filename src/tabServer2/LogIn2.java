@@ -23,6 +23,7 @@ public class LogIn2 extends JPanel{
         //TextField
         txt_fld1=new TextField();
         txt_fld2=new TextField();
+        setBackground(Color.RED);
 
         txt_fld1.setBounds(220,50,200,50);
         txt_fld2.setBounds(220,100,200,50);

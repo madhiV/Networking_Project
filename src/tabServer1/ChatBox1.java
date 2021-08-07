@@ -6,7 +6,8 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 public class ChatBox1 extends JPanel implements Runnable{
-    final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader br;
+    BufferedWriter bw;
     TextArea txt_ar1;
     Label lbl_1;
     TextField txt_fld_1;
@@ -14,10 +15,12 @@ public class ChatBox1 extends JPanel implements Runnable{
     Socket client;
     Button btn;
     Thread t;
+    String msg;
     ChatBox1() throws Exception {
         setBounds(10,10,1000,1000);
         setFont(new Font("Times New Roman",Font.BOLD,18));
         setLayout(null);
+        setBackground(Color.RED);
 
         btn=new Button("Send");
         btn.setBounds(800,800,120,50);
@@ -61,12 +64,31 @@ public class ChatBox1 extends JPanel implements Runnable{
 
             }
         });
+        txt_fld_1.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    msg=txt_fld_1.getText();
+                    txt_ar1.setText(txt_ar1.getText()+"\n"+"YOU : "+msg);
+                    bw.write(msg);
+                    bw.newLine();
+                    bw.flush();
+                    txt_fld_1.setText("");
+                }
+                catch(Exception de){
+
+                }
+            }
+        });
         btn.addMouseListener(new MouseListener(){
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    new DataOutputStream(client.getOutputStream()).writeUTF(txt_fld_1.getText());
-                    txt_ar1.setText(txt_ar1.getText()+"/nYOU : "+txt_fld_1.getText());
+                    msg=txt_fld_1.getText();
+                    txt_ar1.setText(txt_ar1.getText()+"\n"+"YOU : "+msg);
+                    bw.write(msg);
+                    bw.newLine();
+                    bw.flush();
                     txt_fld_1.setText("");
                 }
                 catch(Exception de){
@@ -106,11 +128,14 @@ public class ChatBox1 extends JPanel implements Runnable{
                 try {
                     server=new ServerSocket(500);
                     client=server.accept();
+                    br=new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    bw=new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
+        t.start();
         t.join();
         t=new Thread(this);
         t.start();
@@ -130,6 +155,6 @@ public class ChatBox1 extends JPanel implements Runnable{
         }
     }
     public void receivedText(String msg){
-        txt_ar1.setText(txt_ar1.getText()+"/nHIM : "+msg);
+        txt_ar1.setText(txt_ar1.getText()+"\nHIM : "+msg);
     }
 }

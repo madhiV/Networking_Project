@@ -21,11 +21,13 @@ public class TabServer1 extends JFrame{
         catch(Exception e){
 
         }
+        setBackground(Color.RED);
         setTitle("USER1's ChatBox...");
         setVisible(true);
         setBounds(10,10,1000,1000);
         setLayout(new BorderLayout());
         tabs=new JTabbedPane(JTabbedPane.LEFT);
+        tabs.setBackground(Color.RED);
         panel1=new LogIn1();
         panel2=new SignUp1();
         box=new ChatBox1();

@@ -12,7 +12,6 @@ public class SignUp1 extends JPanel{
     JComboBox<String> list_2;
     ButtonGroup btn_grp;
     SignUp1() throws Exception{
-        setBackground(Color.RED);
         setBounds(10,10,1000,5000);
         setVisible(true);
         setFont(new Font("Times New Roman",Font.BOLD,20));

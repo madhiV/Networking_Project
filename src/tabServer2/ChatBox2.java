@@ -14,7 +14,6 @@ public class ChatBox2 extends JPanel implements Runnable{
     BufferedReader br;
     BufferedWriter bw;
     ChatBox2(){
-        setBackground(Color.RED);
         setBounds(10,10,1000,1000);
         setVisible(true);
         setFont(new Font("Times New Roman",Font.BOLD,18));

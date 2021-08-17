@@ -8,7 +8,6 @@ public class LogIn1 extends JPanel{
     Button btn;
     Label lbl_1,lbl_2;
     LogIn1(){
-        setBackground(Color.RED);
         setBounds(10,10,1000,1000);
         setLayout(null);
         setVisible(true);

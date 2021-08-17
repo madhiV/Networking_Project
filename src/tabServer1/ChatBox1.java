@@ -20,7 +20,6 @@ public class ChatBox1 extends JPanel implements Runnable{
         setBounds(10,10,1000,1000);
         setFont(new Font("Times New Roman",Font.BOLD,18));
         setLayout(null);
-        setBackground(Color.RED);
 
         btn=new Button("Send");
         btn.setBounds(800,800,120,50);
